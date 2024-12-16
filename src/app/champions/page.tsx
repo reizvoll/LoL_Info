@@ -1,4 +1,4 @@
-import { Champion } from "@/types/Champion";
+import { Champion } from "@/types/champion";
 import { fetchChampionList, fetchLatestVersion } from "@/utils/serverApi";
 import Image from "next/image";
 import Link from "next/link";

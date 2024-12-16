@@ -2,10 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getChampionRotation } from "@/utils/serverApi";
-import { ChampionRotation } from "@/types/ChampionRotation";
+import { ChampionRotation } from "@/types/championRotation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Champion } from "@/types/Champion";
+import { Champion } from "@/types/champion";
 
   const fetchChampionImages = async (
     championIds: number[],

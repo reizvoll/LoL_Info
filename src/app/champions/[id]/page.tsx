@@ -1,5 +1,5 @@
 import { fetchChampionDetail, fetchLatestVersion } from "@/utils/serverApi";
-import { ChampionDetail } from "@/types/Champion";
+import { ChampionDetail } from "@/types/champion";
 import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
