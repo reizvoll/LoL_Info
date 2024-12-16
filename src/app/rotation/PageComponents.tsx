@@ -41,6 +41,7 @@ import { Champion } from "@/types/Champion";
     }
   };
 
+// 탄스택 이거 isfetching 써줘야 할듯?
 const PageComponents = () => {
   const [version, setVersion] = useState<string>("");
 

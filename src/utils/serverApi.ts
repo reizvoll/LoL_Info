@@ -1,6 +1,5 @@
 import { Champion, ChampionDetail } from "@/types/Champion";
 import { ChampionRotation } from "@/types/ChampionRotation";
-import { Item, ItemDetail } from "@/types/Item";
 
 const BASE_URL = 'https://ddragon.leagueoflegends.com/cdn';
 
@@ -46,7 +45,7 @@ export const fetchChampionDetail = async (id: string): Promise<ChampionDetail> =
   }
 };
 
-// 아이템 목록
+// 아이템 목록 및 상세정보
 export const fetchItemList = async () => {
   try {
     const version = await fetchLatestVersion();

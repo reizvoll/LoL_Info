@@ -6,9 +6,10 @@ const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 const SPELL_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/spell`;
 const PASSIVE_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/passive`;
 
+// 정규식에 @ 추가!!
 function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip.replace(/<\/?[^>]+(>|$)/g, "");
-  cleanTooltip = cleanTooltip.replace(/{{[^}]+}}/g, "?");
+  let cleanTooltip = tooltip.replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
+  cleanTooltip = cleanTooltip.replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
   return cleanTooltip;
 }
 

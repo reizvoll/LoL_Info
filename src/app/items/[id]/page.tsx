@@ -13,7 +13,6 @@ interface ItemDetailPageProps {
 export async function generateMetadata({ params }: ItemDetailPageProps) {
   const { id } = params
   const { data } = await fetchItemList()
-  const version = await fetchLatestVersion();
 
   return {
     title: `${data[id]?.name}`,
@@ -72,7 +71,7 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
         <div style={{ marginTop: "20px" }}>
           <h2 style={{ fontSize: "1.2rem", fontWeight: "bold" }}>Built From</h2>
           <ul style={{ paddingLeft: "20px" }}>
-            {data[id]?.from.map((prevItemId) => (
+            {data[id]?.from.map((prevItemId: string) => (
               <li key={prevItemId}>{prevItemId}</li>
             ))}
           </ul>

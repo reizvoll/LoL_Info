@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LOL-INFO",
@@ -37,9 +34,9 @@ export default function RootLayout({
             </Link>
           </nav>
         </header>
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow flex flex-col">{children}</main>
         <footer className="bg-gray-800 text-white p-4 text-center">
-          © by 림졍. All rights reserved
+        lol-info is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
         </footer>
       </body>
     </html>
