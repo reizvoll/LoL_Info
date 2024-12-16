@@ -9,16 +9,22 @@ export default async function ChampionsPage() {
   console.log(champions);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '16px' }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+        gap: "16px",
+      }}
+    >
       {champions.map((champion) => (
-        <Link key={champion.id} href={`/champions/${champion.id}`} passHref >
-          <div style={{cursor: 'pointer' }}>
+        <Link key={champion.id} href={`/champions/${champion.id}`} passHref>
+          <div style={{ cursor: "pointer" }}>
             <Image
               src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`}
               alt={champion.name}
               width={120}
               height={120}
-              style={{ borderRadius: '8px' }}
+              style={{ borderRadius: "8px" }}
             />
             <h3>{champion.name}</h3>
             <h5>{champion.title}</h5>

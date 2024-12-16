@@ -11,12 +11,12 @@ interface ItemDetailPageProps {
 
 // Metadata 생성
 export async function generateMetadata({ params }: ItemDetailPageProps) {
-  const { id } = params
-  const { data } = await fetchItemList()
+  const { id } = params;
+  const { data } = await fetchItemList();
 
   return {
     title: `${data[id]?.name}`,
-    description: `${data[id]?.description}`
+    description: `${data[id]?.description}`,
   };
 }
 
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ItemDetailPageProps) {
 export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
   const version = await fetchLatestVersion();
   const id = params.id;
-  const { data } = await fetchItemList()
+  const { data } = await fetchItemList();
   // [1001:{데이터1}, 1011:{데이터2}]
 
   if (!data[id]) {
@@ -39,7 +39,9 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
+      <h1
+        style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}
+      >
         {data[id]?.name}
       </h1>
       <Image

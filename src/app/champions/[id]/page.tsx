@@ -91,31 +91,33 @@ export default async function ChampionDetailPage({
         </div>
 
         <div style={{ marginTop: "30px" }}>
-        <h3>스킬 정보</h3>
-        {champion.spells.map((spell) => (
-          <div key={spell.id} style={{ marginTop: "20px" }}>
-            <h4>{spell.name}</h4>
-            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <Image
-                src={`${SPELL_IMAGE_BASE_URL}/${spell.image.full}`}
-                alt={spell.name}
-                width={64}
-                height={64}
-              />
-              <div>
-                <p>{spell.description}</p>
-                <p>
-                  <em>
-                    {spell.tooltip
-                      ? parseTooltip(spell.tooltip)
-                      : "해당 내용에 대한 정보가 없습니다."}
-                  </em>
-                </p>
+          <h3>스킬 정보</h3>
+          {champion.spells.map((spell) => (
+            <div key={spell.id} style={{ marginTop: "20px" }}>
+              <h4>{spell.name}</h4>
+              <div
+                style={{ display: "flex", gap: "10px", alignItems: "center" }}
+              >
+                <Image
+                  src={`${SPELL_IMAGE_BASE_URL}/${spell.image.full}`}
+                  alt={spell.name}
+                  width={64}
+                  height={64}
+                />
+                <div>
+                  <p>{spell.description}</p>
+                  <p>
+                    <em>
+                      {spell.tooltip
+                        ? parseTooltip(spell.tooltip)
+                        : "해당 내용에 대한 정보가 없습니다."}
+                    </em>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
 
       <div style={{ marginTop: "30px" }}>
