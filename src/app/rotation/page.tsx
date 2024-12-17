@@ -1,6 +1,6 @@
 "use client";
 
-import PageComponents from "../../ui/rotation/PageComponents";
+import PageComponents from "../../components/ui/rotation/PageComponents";
 import AppProvider from "./Provider";
 
 export default function RotationPage() {
