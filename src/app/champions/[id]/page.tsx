@@ -5,11 +5,10 @@ import Image from "next/image";
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 const SPELL_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/spell`;
 const PASSIVE_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/passive`;
+const SKIN_IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash";
 
-// 정규식에 @ 추가!!
 function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip.replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
-  cleanTooltip = cleanTooltip.replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
+  let cleanTooltip = tooltip.replace(/<\/?[^>]+(>|$)|[^ ]+/g, "");
   return cleanTooltip;
 }
 
@@ -136,6 +135,21 @@ export default async function ChampionDetailPage({
             <li key={index}>{tip}</li>
           ))}
         </ul>
+      </div>
+      <h2>Skins</h2>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {champion.skins.map((skin) => (
+          <div key={skin.id} style={{ textAlign: "center" }}>
+            <Image
+              src={`${SKIN_IMAGE_BASE_URL}/${champion.id}_${skin.num}.jpg`}
+              alt={skin.name}
+              width={300}
+              height={500}
+              style={{ borderRadius: "8px" }}
+            />
+            <p>{skin.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

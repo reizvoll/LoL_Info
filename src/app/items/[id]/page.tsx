@@ -3,6 +3,13 @@ import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 
+function parseTooltip(tooltip: string): string {
+  let cleanTooltip = tooltip
+  .replace(/<subtitleLeft>.*?<[^>]*>([^<]*)<\/[^>]*>.*?<\/subtitleLeft>/g, "($1)") // 괄호로 감싸기
+  .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
+  return cleanTooltip.trim();
+}
+
 interface ItemDetailPageProps {
   params: {
     id: string;
@@ -42,7 +49,7 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
       <h1
         style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}
       >
-        {data[id]?.name}
+        {parseTooltip(data[id]?.name || "")}
       </h1>
       <Image
         src={`${IMAGE_BASE_URL}/${version}/img/item/${data[id]?.image.full}`}
@@ -51,15 +58,9 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
         height={128}
         style={{ borderRadius: "8px" }}
       />
-      <p style={{ marginTop: "10px", fontSize: "1rem", color: "#555" }}>
+      <p style={{ marginTop: "10px", fontSize: "1rem", color: "#666" }}>
         {data[id]?.description}
       </p>
-
-      {data[id]?.plaintext && (
-        <p style={{ marginTop: "10px", fontStyle: "italic", color: "#888" }}>
-          {data[id]?.plaintext}
-        </p>
-      )}
 
       {/* 가격 정보 */}
       <div style={{ marginTop: "20px" }}>
