@@ -1,5 +1,6 @@
 import { Champion, ChampionDetail } from "@/types/champion";
 import { ChampionRotation } from "@/types/championRotation";
+import { ItemDetail } from "@/types/Item";
 
 const BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 
@@ -58,15 +59,14 @@ export const fetchItemList = async () => {
   try {
     const version = await fetchLatestVersion();
     const response = await fetch(`${BASE_URL}/${version}/data/ko_KR/item.json`);
-    if (!response.ok) {
-      throw new Error("오류! 오류! (아이템 목록 로드 실패)");
-    }
-    const { data } = await response.json();
-    const itemDetail = Object.entries(data);
-    return { itemDetail, data };
+    if (!response.ok) throw new Error("오류! 오류! (아이템 목록 로드 실패)");
+
+    const { data } = (await response.json()) as { data: Record<string, ItemDetail> };
+
+    return { itemDetail: Object.entries(data), data };
   } catch (error) {
     console.error("아이템 목록 가져오기 실패!:", error);
-    throw new Error("오류! 오류! (아이템 목록 로드 실패)");
+    throw error;
   }
 };
 

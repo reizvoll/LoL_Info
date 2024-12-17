@@ -14,7 +14,7 @@ export default async function ItemsPage() {
           <div style={{ cursor: "pointer" }}>
             <Image
               src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${value.image.full}`}
-              alt={value.name}
+              alt={value.name || ""}
               width={64}
               height={64}
             />
