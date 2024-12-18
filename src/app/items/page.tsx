@@ -16,7 +16,7 @@ export default async function ItemsPage() {
 
   return (
     <div className="px-4 py-12 w-full mx-auto">
-      <h1 className="text-center mb-16 text-2xl font-bold text-white">
+      <h1 className="text-center mb-16 text-2xl font-bold">
         아이템 리스트
       </h1>
       <div className="grid grid-cols-[repeat(auto-fit,_163px)] justify-center gap-8">

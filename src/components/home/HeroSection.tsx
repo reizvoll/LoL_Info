@@ -8,7 +8,7 @@ export default function HeroSection() {
           data-testid="backdrop-embed-video"
           autoPlay
           muted // autoPlay 정책 문제
-          className="w-full h-[calc(100vh-144px)] object-cover" // calc[원하는 높이 - 빼야하는 친구들, 사칙연산 아무거나 가능 ^0^)v]
+          className="w-full h-[calc(100vh-152px)] object-cover" // calc[원하는 높이 - 빼야하는 친구들, 사칙연산 아무거나 가능 ^0^)v]
           loop
           playsInline
         >

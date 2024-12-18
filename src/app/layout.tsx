@@ -6,6 +6,7 @@ import AppProvider from "@/components/providers/RqProvider";
 import { Suspense } from "react";
 import Loading from "@/components/layout/Loading";
 import ErrorBoundary from "@/components/layout/ErrorBoundary";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "LOL-INFO",
@@ -23,7 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen dark">
+      <ThemeProvider attribute="class">
         <Header />
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
@@ -35,6 +37,7 @@ export default function RootLayout({
           </Suspense>
         </ErrorBoundary>
         <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -104,7 +104,7 @@ const PageComponents = () => {
 
   return (
     <div className="px-4 py-12 w-full mx-auto">
-      <h1 className="text-center mb-16 text-2xl font-bold text-white">
+      <h1 className="text-center mb-16 text-2xl font-bold">
         이번 주 로테이션 챔피언
       </h1>
       <div className="flex flex-wrap justify-center gap-10">

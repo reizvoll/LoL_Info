@@ -45,7 +45,7 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-144px)] p-6">
+    <div className="flex items-center justify-center min-h-[calc(100vh-152px)] p-6">
       <div className="max-w-sm w-full bg-gray-800 rounded-lg shadow-lg p-8 space-y-8">
         {/* 이미지 및 제목 섹션 */}
         <div className="text-center">
