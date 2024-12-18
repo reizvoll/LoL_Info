@@ -6,6 +6,10 @@ import { ChampionRotation } from "@/types/championRotation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Champion } from "@/types/champion";
+import Link from "next/link";
+
+const BACKGROUND_URL =
+  "https://ddragon.leagueoflegends.com/cdn/img/champion/splash";
 
 const fetchChampionImages = async (
   championIds: number[],
@@ -86,52 +90,72 @@ const PageComponents = () => {
     }
   }, [rotationData, version]);
 
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div> 오류! 오류! (데이터 로드 중 오류 발생) </div>;
+  if (isPending)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">Loading...</div>
+      </div>
+    );
+  if (isError)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">오류! 오류! (데이터 로드 중 오류 발생)</div>
+      </div>
+    );
 
   return (
-    <div>
-      <h2>이번 주 로테이션 챔피언</h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "16px",
-        }}
-      >
+    <div className="px-4 py-12 w-full mx-auto">
+      <h1 className="text-center mb-16 text-2xl font-bold text-white">
+        이번 주 로테이션 챔피언
+      </h1>
+      <div className="flex flex-wrap justify-center gap-10">
         {freeChampions.map((champion) => (
-          <div key={champion.id}>
-            <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-              alt={champion.name}
-              width={120}
-              height={120}
-              style={{ borderRadius: "8px" }}
-            />
-            <p>{champion.name}</p>
-          </div>
+          <Link
+            key={champion.id}
+            href={`/champions/${champion.id}`}
+            passHref
+            className="text-center"
+          >
+            <div className="cursor-pointer text-center bg-gray-800 rounded-lg p-3 flex flex-col items-center justify-between w-[300px] h-[180px] transition-transform transform hover:scale-105">
+              <Image
+                src={`${BACKGROUND_URL}/${champion.id}_0.jpg`}
+                alt={champion.name}
+                width={210}
+                height={240}
+                className="rounded-lg object-cover"
+              />
+              <p className="mt-2 text-sm text-white text-center">
+                {champion.name}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
 
-      <h2> For 뉴비 (최대 Lv: {rotationData?.maxNewPlayerLevel})</h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "16px",
-        }}
-      >
+      <h1 className="text-center m-16 text-2xl font-bold text-white">
+        For 뉴비 (최대 Lv: {rotationData?.maxNewPlayerLevel})
+      </h1>
+      <div className="flex flex-wrap justify-center gap-10">
         {newPlayerChampions.map((champion) => (
-          <div key={champion.id}>
-            <Image
-              src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`}
-              alt={champion.name}
-              width={120}
-              height={120}
-              style={{ borderRadius: "8px" }}
-            />
-            <p>{champion.name}</p>
-          </div>
+          <Link
+            key={champion.id}
+            href={`/champions/${champion.id}`}
+            passHref
+            className="text-center"
+          >
+            <div className="cursor-pointer text-center bg-gray-800 rounded-lg p-3 flex flex-col items-center justify-between w-[300px] h-[180px] transition-transform transform hover:scale-105">
+              <Image
+                src={`${BACKGROUND_URL}/${champion.id}_0.jpg`}
+                alt={champion.name}
+                width={210}
+                height={240}
+                className="rounded-lg object-cover"
+              />
+              <p className="mt-2 text-sm text-white text-center">
+                {champion.name}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
