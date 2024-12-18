@@ -8,59 +8,23 @@ export default async function ChampionsPage() {
   const version = await fetchLatestVersion();
 
   return (
-    <div
-      style={{
-        padding: "50px 15px",
-        boxSizing: "border-box",
-        width: "100%",
-        margin: "0 auto",
-      }}
-    >
-      <h1
-        style={{
-          textAlign: "center",
-          marginBottom: "70px",
-          fontSize: "2rem",
-          fontWeight: "Bold",
-          color: "#fff",
-        }}
-      >
+    <div className="px-4 py-12 w-full mx-auto">
+      <h1 className="text-center mb-16 text-2xl font-bold text-white">
         챔피언 리스트
       </h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, 163px)", // 카드의 너비 고정
-          justifyContent: "center",
-          gap: "30px",
-        }}
-      >
+      <div className="grid grid-cols-[repeat(auto-fit,_163px)] justify-center gap-8">
         {champions.map((champion) => (
           <Link key={champion.id} href={`/champions/${champion.id}`} passHref>
-            <div
-              className="hover-scale" // 공용 호버 클래스 추가
-              style={{
-                cursor: "pointer",
-                textAlign: "center",
-                background: "#333",
-                borderRadius: "8px",
-                padding: "12px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "space-between",
-                height: "220px",
-              }}
-            >
+            <div className="cursor-pointer text-center bg-gray-800 rounded-lg p-3 flex flex-col items-center justify-between h-[220px] transition-transform transform hover:scale-105">
               <Image
                 src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`}
                 alt={champion.name}
                 width={120}
                 height={120}
-                style={{ borderRadius: "8px" }}
+                className="rounded-md"
               />
-              <h3 style={{ margin: "8px 0 4px" }}>{champion.name}</h3>
-              <h5 style={{ color: "gray", margin: 0 }}>{champion.title}</h5>
+              <h3 className="mt-2 mb-1 text-white">{champion.name}</h3>
+              <h5 className="text-gray-400 m-0">{champion.title}</h5>
             </div>
           </Link>
         ))}

@@ -23,14 +23,6 @@ interface Spell {
   name: string;
   description: string;
   tooltip?: string; // 요놈에서 문제다.
-  leveltip?: {
-    label: string[];
-    effect: string[];
-  };
-  maxrank: number;
-  cooldown: number[];
-  cost: number[];
-  range: number[];
   image: Image;
 }
 
@@ -53,9 +45,7 @@ export interface Champion {
 // 확장된 챔피언 세부 정보 타입
 export interface ChampionDetail extends Champion {
   blurb: string;
-  lore: string;
   tags: string[];
-  partype: string;
   skins: Skin[];
   spells: Spell[];
   passive: Passive;
