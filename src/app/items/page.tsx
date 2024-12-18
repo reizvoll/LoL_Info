@@ -1,13 +1,7 @@
+import { itemParseTooltip } from "@/utils/cleanTooltip";
 import { fetchItemList, fetchLatestVersion } from "@/utils/serverApi";
 import Image from "next/image";
 import Link from "next/link";
-
-function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip
-  .replace(/<subtitleLeft>.*?<[^>]*>([^<]*)<\/[^>]*>.*?<\/subtitleLeft>/g, "($1)") // 괄호로 감싸기
-  .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
-  return cleanTooltip.trim();
-}
 
 export default async function ItemsPage() {
   const { itemDetail } = await fetchItemList();
@@ -25,12 +19,12 @@ export default async function ItemsPage() {
             <div className="cursor-pointer text-center bg-gray-800 rounded-lg p-3 flex flex-col items-center justify-between h-[220px] transition-transform transform hover:scale-105">
               <Image
                 src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${value.image.full}`}
-                alt={parseTooltip(value.name) || ""}
+                alt={itemParseTooltip(value.name) || ""}
                 width={100}
                 height={100}
                 className="rounded-md"
               />
-              <h3 className="mt-2 mb-1 text-white">{parseTooltip(value.name)}</h3>
+              <h3 className="mt-2 mb-1 text-white">{itemParseTooltip(value.name)}</h3>
               <h5 className="text-gray-400 m-0">
                 가격 : {value.gold?.base || "X"}
               </h5>

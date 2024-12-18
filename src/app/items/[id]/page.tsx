@@ -1,14 +1,8 @@
+import { itemParseTooltip } from "@/utils/cleanTooltip";
 import { fetchItemList, fetchLatestVersion } from "@/utils/serverApi";
 import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
-
-function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip
-  .replace(/<subtitleLeft>.*?<[^>]*>([^<]*)<\/[^>]*>.*?<\/subtitleLeft>/g, "($1)") // 괄호로 감싸기
-  .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
-  return cleanTooltip.trim();
-}
 
 interface ItemDetailPageProps {
   params: {
@@ -57,14 +51,14 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
             className="rounded-md mx-auto"
           />
           <h1 className="mt-4 text-2xl font-bold">
-            {parseTooltip(data[id]?.name || "")}
+            {itemParseTooltip(data[id]?.name || "")}
           </h1>
         </div>
 
         {/* 설명 섹션 */}
         <div className="text-center">
           <p className= "text-base leading-relaxed">
-            {parseTooltip(data[id]?.description)}
+            {itemParseTooltip(data[id]?.description)}
           </p>
         </div>
 
