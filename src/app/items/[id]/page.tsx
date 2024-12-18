@@ -3,6 +3,13 @@ import Image from "next/image";
 
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 
+function parseTooltip(tooltip: string): string {
+  let cleanTooltip = tooltip
+  .replace(/<subtitleLeft>.*?<[^>]*>([^<]*)<\/[^>]*>.*?<\/subtitleLeft>/g, "($1)") // 괄호로 감싸기
+  .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
+  return cleanTooltip.trim();
+}
+
 interface ItemDetailPageProps {
   params: {
     id: string;
@@ -11,13 +18,12 @@ interface ItemDetailPageProps {
 
 // Metadata 생성
 export async function generateMetadata({ params }: ItemDetailPageProps) {
-  const { id } = params
-  const { data } = await fetchItemList()
-  const version = await fetchLatestVersion();
+  const { id } = params;
+  const { data } = await fetchItemList();
 
   return {
     title: `${data[id]?.name}`,
-    description: `${data[id]?.description}`
+    description: `${data[id]?.description}`,
   };
 }
 
@@ -25,7 +31,7 @@ export async function generateMetadata({ params }: ItemDetailPageProps) {
 export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
   const version = await fetchLatestVersion();
   const id = params.id;
-  const { data } = await fetchItemList()
+  const { data } = await fetchItemList();
   // [1001:{데이터1}, 1011:{데이터2}]
 
   if (!data[id]) {
@@ -39,45 +45,36 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
-        {data[id]?.name}
-      </h1>
-      <Image
-        src={`${IMAGE_BASE_URL}/${version}/img/item/${data[id]?.image.full}`}
-        alt={data[id]?.name}
-        width={128}
-        height={128}
-        style={{ borderRadius: "8px" }}
-      />
-      <p style={{ marginTop: "10px", fontSize: "1rem", color: "#555" }}>
-        {data[id]?.description}
-      </p>
-
-      {data[id]?.plaintext && (
-        <p style={{ marginTop: "10px", fontStyle: "italic", color: "#888" }}>
-          {data[id]?.plaintext}
-        </p>
-      )}
-
-      {/* 가격 정보 */}
-      <div style={{ marginTop: "20px" }}>
-        <h2 style={{ fontSize: "1.2rem", fontWeight: "bold" }}>가격 정보</h2>
-        <p>기본 가격: {data[id]?.gold.base}</p>
-        <p>총 가격: {data[id]?.gold.total}</p>
-        <p>판매 가격: {data[id]?.gold.sell}</p>
-      </div>
-
-      {data[id]?.from && (
-        <div style={{ marginTop: "20px" }}>
-          <h2 style={{ fontSize: "1.2rem", fontWeight: "bold" }}>Built From</h2>
-          <ul style={{ paddingLeft: "20px" }}>
-            {data[id]?.from.map((prevItemId) => (
-              <li key={prevItemId}>{prevItemId}</li>
-            ))}
-          </ul>
+    <div className="flex items-center justify-center min-h-[calc(100vh-144px)] p-6">
+      <div className="max-w-sm w-full bg-gray-800 rounded-lg shadow-lg p-8 space-y-8">
+        {/* 이미지 및 제목 섹션 */}
+        <div className="text-center">
+          <Image
+            src={`${IMAGE_BASE_URL}/${version}/img/item/${data[id]?.image.full}`}
+            alt={data[id]?.name}
+            width={128}
+            height={128}
+            className="rounded-md mx-auto"
+          />
+          <h1 className="mt-4 text-2xl font-bold">
+            {parseTooltip(data[id]?.name || "")}
+          </h1>
         </div>
-      )}
+
+        {/* 설명 섹션 */}
+        <div className="text-center">
+          <p className= "text-base leading-relaxed">
+            {parseTooltip(data[id]?.description)}
+          </p>
+        </div>
+
+        {/* 가격 정보 섹션 */}
+        <div className="border-t border-gray-500 pt-4">
+          <h2 className="text-lg font-semibold mb-2">가격 정보</h2>
+          <p>가격: {data[id]?.gold.base}</p>
+          <p>판매 가격: {data[id]?.gold.sell}</p>
+        </div>
+      </div>
     </div>
   );
 }
