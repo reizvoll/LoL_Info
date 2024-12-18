@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AppProvider from "@/components/providers/RqProvider";
+import { Suspense } from "react";
+import Loading from "@/components/layout/Loading";
+import ErrorBoundary from "@/components/layout/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "LOL-INFO",
@@ -21,7 +25,15 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex flex-col min-h-screen">
         <Header />
-        <main className="relative flex-grow flex flex-col">{children}</main>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <AppProvider>
+              <main className="relative flex-grow flex flex-col">
+                {children}
+              </main>
+            </AppProvider>
+          </Suspense>
+        </ErrorBoundary>
         <Footer />
       </body>
     </html>
