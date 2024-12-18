@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
@@ -16,6 +17,7 @@ export default function Header() {
         <Link href="/rotation" className="hover:text-yellow-100">
           챔피언 로테이션
         </Link>
+        <ThemeToggle />
       </nav>
     </header>
   );

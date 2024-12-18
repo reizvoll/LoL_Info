@@ -9,7 +9,7 @@ const BACKGROUND_URL =
   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash";
 
 function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip.replace(/<\/?[^>]+(>|$)|[^ ]+/g, "");
+  let cleanTooltip = tooltip.replace(/[^가-힣\s]/g, " ");
   return cleanTooltip;
 }
 
@@ -95,7 +95,7 @@ export default async function ChampionDetailPage({
             />
             <div>
               <strong>{champion.passive.name}</strong>
-              <p>{champion.passive.description}</p>
+              <p>{parseTooltip(champion.passive.description)}</p>
             </div>
           </div>
         </div>
@@ -114,12 +114,7 @@ export default async function ChampionDetailPage({
               />
               <div>
                 <strong>{spell.name}</strong>
-                <p>{spell.description}</p>
-                <p className="italic">
-                  {spell.tooltip
-                    ? parseTooltip(spell.tooltip)
-                    : "해당 내용에 대한 정보가 없습니다."}
-                </p>
+                <p>{parseTooltip(spell.description)}</p>
               </div>
             </div>
           ))}
