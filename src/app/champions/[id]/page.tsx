@@ -1,17 +1,13 @@
 import { fetchChampionDetail, fetchLatestVersion } from "@/utils/serverApi";
 import { ChampionDetail } from "@/types/champion";
 import Image from "next/image";
+import { champParseTooltip } from "@/utils/cleanTooltip";
 
 const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 const SPELL_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/spell`;
 const PASSIVE_IMAGE_BASE_URL = `${IMAGE_BASE_URL}/14.24.1/img/passive`;
 const BACKGROUND_URL =
   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash";
-
-function parseTooltip(tooltip: string): string {
-  let cleanTooltip = tooltip.replace(/[^가-힣\s]/g, " ");
-  return cleanTooltip;
-}
 
 interface ChampionDetailPageProps {
   params: {
@@ -95,7 +91,7 @@ export default async function ChampionDetailPage({
             />
             <div>
               <strong>{champion.passive.name}</strong>
-              <p>{parseTooltip(champion.passive.description)}</p>
+              <p>{champParseTooltip(champion.passive.description)}</p>
             </div>
           </div>
         </div>
@@ -114,7 +110,7 @@ export default async function ChampionDetailPage({
               />
               <div>
                 <strong>{spell.name}</strong>
-                <p>{parseTooltip(spell.description)}</p>
+                <p>{champParseTooltip(spell.description)}</p>
               </div>
             </div>
           ))}
