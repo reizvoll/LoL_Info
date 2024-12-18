@@ -5,7 +5,7 @@ import Link from "next/link";
 function parseTooltip(tooltip: string): string {
   let cleanTooltip = tooltip
   .replace(/<subtitleLeft>.*?<[^>]*>([^<]*)<\/[^>]*>.*?<\/subtitleLeft>/g, "($1)") // 괄호로 감싸기
-    .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
+  .replace(/<\/?[^>]+(>|$)|@[^ ]+/g, "");
   return cleanTooltip.trim();
 }
 
