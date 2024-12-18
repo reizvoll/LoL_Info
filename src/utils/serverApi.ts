@@ -1,6 +1,6 @@
 import { Champion, ChampionDetail } from "@/types/champion";
 import { ChampionRotation } from "@/types/championRotation";
-import { ItemDetail } from "@/types/Item";
+import { ItemDetail } from "@/types/item";
 
 const BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 
