@@ -1,8 +1,8 @@
+import ItemDescription from "@/components/items/ItemDescription";
+import ItemImage from "@/components/items/ItemImage";
+import ItemPrice from "@/components/items/ItemPrice";
 import { itemParseTooltip } from "@/utils/cleanTooltip";
 import { fetchItemList, fetchLatestVersion } from "@/utils/serverApi";
-import Image from "next/image";
-
-const IMAGE_BASE_URL = "https://ddragon.leagueoflegends.com/cdn";
 
 interface ItemDetailPageProps {
   params: {
@@ -28,6 +28,7 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
   const { data } = await fetchItemList();
   // [1001:{데이터1}, 1011:{데이터2}]
 
+  //데이터 없을 경우 정보 없음을 표시
   if (!data[id]) {
     return (
       <div style={{ padding: "20px", textAlign: "center" }}>
@@ -38,36 +39,25 @@ export default async function ItemDetailPage({ params }: ItemDetailPageProps) {
     );
   }
 
+  // 아이템 데이터가 있을 경우 상세 정보 렌더링
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-152px)] p-6">
       <div className="max-w-sm w-full bg-gray-800 rounded-lg shadow-lg p-8 space-y-8">
-        {/* 이미지 및 제목 섹션 */}
-        <div className="text-center">
-          <Image
-            src={`${IMAGE_BASE_URL}/${version}/img/item/${data[id]?.image.full}`}
-            alt={data[id]?.name}
-            width={128}
-            height={128}
-            className="rounded-md mx-auto"
-          />
-          <h1 className="mt-4 text-2xl font-bold">
-            {itemParseTooltip(data[id]?.name || "")}
-          </h1>
-        </div>
-
+        {/* 이미지 섹션 */}
+        <ItemImage
+          version={version}
+          imageFull={data[id]?.image.full}
+          name={itemParseTooltip(data[id]?.name || "")}
+        />
         {/* 설명 섹션 */}
-        <div className="text-center">
-          <p className= "text-base leading-relaxed">
-            {itemParseTooltip(data[id]?.description)}
-          </p>
-        </div>
-
+        <ItemDescription
+          description={itemParseTooltip(data[id]?.description)}
+        />
         {/* 가격 정보 섹션 */}
-        <div className="border-t border-gray-500 pt-4">
-          <h2 className="text-lg font-semibold mb-2">가격 정보</h2>
-          <p>가격: {data[id]?.gold.base}</p>
-          <p>판매 가격: {data[id]?.gold.sell}</p>
-        </div>
+        <ItemPrice
+          base={data[id]?.gold.base}
+          sell={data[id]?.gold.sell}
+        />
       </div>
     </div>
   );
