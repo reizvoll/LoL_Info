@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-    {
-    "source": "/champions/:id",
-    "destination": "/champions/[id]"
-    }
-    ]
-    }
